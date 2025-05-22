@@ -3,13 +3,18 @@ import { modalState, type IModalState } from '../../../../stores/modalState';
 import './styeld.css';
 import { useRecoilState } from 'recoil';
 import { NoticeContext } from '../../../../provider/NoticeProvider';
+import {
+  NoticeSearchContext,
+  useNoticeSearch,
+} from '../../../../pages/Support/Notice';
 
 export const NoticeSearch2 = () => {
   const [_, setModal] = useRecoilState<IModalState>(modalState);
   const title = useRef<HTMLInputElement>(null);
   const [startDate, setStartDate] = useState<string>();
   const [endDate, setEndDate] = useState<string>();
-  const { setSearchData } = useContext(NoticeContext);
+  // const { setSearchData } = useContext(NoticeContext);
+  const { setSearchData } = useNoticeSearch();
 
   const handlerSearch = () => {
     setSearchData({

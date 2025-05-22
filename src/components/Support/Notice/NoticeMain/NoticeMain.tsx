@@ -8,6 +8,11 @@ import axios, { type AxiosResponse } from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { PageNavigation } from '../../../common.componets/PageNavigation/PageNavigation';
 import { NoticeContext } from '../../../../provider/NoticeProvider';
+import { createSearchContext } from '../../../../provider/SearchProvider';
+import {
+  NoticeSearchContext,
+  useNoticeSearch,
+} from '../../../../pages/Support/Notice';
 
 interface INotice {
   noticeId: number;
@@ -24,11 +29,13 @@ interface INoticeResponse {
 
 export const NoticeMain = () => {
   const [modal, setModal] = useRecoilState<IModalState>(modalState);
-  const { search } = useLocation();
+  // const { search } = useLocation();
   const [noticeList, setNoticeList] = useState<INotice[]>([]);
   const [noticeCount, setNoticeCount] = useState<number>(0);
   // const [noticeId, setNoticeId] = useState<number>(0); noticeId를 따로 상태값으로 빼서 사용하는 방법
-  const { searchData } = useContext(NoticeContext);
+  // const { searchData } = useContext(NoticeContext);
+  // const { searchData } = useContext(NoticeSearchContext);
+  const { searchData } = useNoticeSearch();
 
   // URLSearchParams으로 검색하는 기능
   // useEffect(() => {
@@ -36,13 +43,13 @@ export const NoticeMain = () => {
   // }, [search]);
 
   // Provider로 검색하는 기능
-  // useEffect(() => {
-  //   searchList();
-  // }, [searchData]);
+  useEffect(() => {
+    searchList();
+  }, [searchData]);
 
   const searchList = (cPage?: number) => {
     cPage = cPage || 1;
-    const searchParam = new URLSearchParams(search);
+    const searchParam = new URLSearchParams(searchData);
     searchParam.append('currentPage', cPage.toString());
     searchParam.append('pageSize', '5');
 
