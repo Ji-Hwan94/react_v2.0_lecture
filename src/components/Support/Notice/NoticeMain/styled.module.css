@@ -1,0 +1,34 @@
+@import 'tailwindcss';
+
+.container {
+  @apply flex min-h-screen flex-col items-center justify-start p-5;
+}
+
+.table {
+  @apply w-full max-w-6xl overflow-hidden rounded-lg bg-white shadow-lg;
+}
+
+.tableHeader {
+  @apply bg-amber-500 text-gray-900;
+}
+
+.headerCell {
+  @apply border-b border-blue-400 px-6 py-4 text-center text-sm font-semibold tracking-wider text-white uppercase;
+}
+
+.row {
+  @apply transition duration-300 ease-in-out hover:bg-gray-50;
+}
+
+.cell {
+  @apply border-b border-gray-200 px-6 py-4 text-center text-sm font-medium text-gray-700;
+}
+
+.titleCell {
+  composes: cell; /* cell 클래스의 모든 스타일을 상속받음 */
+  @apply cursor-pointer text-blue-600 hover:text-blue-800;
+}
+
+.emptyRow {
+  @apply py-8 text-center text-gray-500;
+}
